@@ -12,9 +12,11 @@ import com.example.myorganizationlist.model.Product
 
 class ListaOfProductsAdapter(
     private val context: Context,
-    private val products: List<Product>
+    products: List<Product>
 
 ) : RecyclerView.Adapter<ListaOfProductsAdapter.ViewHolder>() {
+
+    private val datasets = products.toMutableList()
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         fun bindThis(product: Product) {
@@ -37,11 +39,16 @@ class ListaOfProductsAdapter(
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = products.size
+    override fun getItemCount(): Int = datasets.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val product = products[position]
+        val product = datasets[position]
         holder.bindThis(product)
     }
 
+    fun upgrade(products: List<Product>) {
+        datasets.clear()
+        datasets.addAll(products)
+        notifyDataSetChanged()
+    }
 }
