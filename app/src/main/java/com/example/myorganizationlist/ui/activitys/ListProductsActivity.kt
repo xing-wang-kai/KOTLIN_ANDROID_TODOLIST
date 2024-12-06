@@ -2,7 +2,6 @@ package com.example.myorganizationlist.ui.activitys
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -10,7 +9,6 @@ import com.example.myorganizationlist.DAO.ProductDAO
 import com.example.myorganizationlist.R
 import com.example.myorganizationlist.databinding.ActivityMainBinding
 import com.example.myorganizationlist.ui.recycleview_adapter.ListaOfProductsAdapter
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ListProductsActivity: AppCompatActivity(R.layout.activity_main) {
 

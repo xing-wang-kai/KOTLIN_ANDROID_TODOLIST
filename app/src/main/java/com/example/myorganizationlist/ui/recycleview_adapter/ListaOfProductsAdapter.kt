@@ -19,6 +19,7 @@ class ListaOfProductsAdapter(
     private val datasets = products.toMutableList()
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+
         fun bindThis(product: Product) {
             val title = itemView.findViewById<TextView>(R.id.title)
             val description = itemView.findViewById<TextView>(R.id.descriptions)
