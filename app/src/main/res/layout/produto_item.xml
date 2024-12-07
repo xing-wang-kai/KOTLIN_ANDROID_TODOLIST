@@ -28,9 +28,11 @@
             android:id="@+id/title"
 
             android:layout_width="0dp"
-
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
+
+            android:layout_marginStart="12dp"
+
+            app:layout_constraintHorizontal_weight="7"
 
             android:layout_margin="24dp"
             android:fontFamily="@font/montserrat_bold"
@@ -42,7 +44,7 @@
             android:ellipsize="end"
 
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imageView"
+            app:layout_constraintStart_toEndOf="@id/produto_item_imagem_view"
             app:layout_constraintTop_toTopOf="parent"
 
             tools:text="@tools:sample/lorem/random" />
@@ -85,11 +87,21 @@
             app:layout_constraintEnd_toEndOf="@id/title"
             app:layout_constraintStart_toStartOf="@id/title"
             />
+<!--        <androidx.constraintlayout.widget.Guideline-->
+<!--            android:id="@+id/guideLine"-->
+
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            app:layout_constraintGuide_percent="0.3"-->
+<!--            />-->
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="120dp"
+            android:id="@+id/produto_item_imagem_view"
+            android:layout_width="0dp"
             android:layout_height="0dp"
+
+            app:layout_constraintWidth_percent="0.3"
 
             android:scaleType="centerCrop"
 

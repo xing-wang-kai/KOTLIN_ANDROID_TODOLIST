@@ -14,24 +14,34 @@
         android:layout_height="wrap_content"
         tools:context=".ui.activitys.FormProductActivity">
 
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/floatingActionButton"
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-        android:clickable="true"
-        android:contentDescription="This is only a float botton"
-        android:focusable="true"
+            android:layout_margin="20dp"
 
-        android:src="@drawable/baseline_add_circle_outline_24"
-        tools:layout_editor_absoluteX="355dp"
-        tools:layout_editor_absoluteY="675dp"
+            android:contentDescription="@string/extended_fab_content_desc"
+            android:text="@string/extended_fab_content_desc"
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+            android:clickable="true"
+            android:focusable="true"
+
+            android:icon="@drawable/baseline_add_circle_outline_24"
+
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+
+            android:textColor="@android:color/white"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:icon="@drawable/baseline_add_circle_outline_24"
+            app:iconTint="@android:color/white"
+            app:shapeAppearanceOverlay="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+             />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_of_products"

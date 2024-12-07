@@ -1,14 +1,17 @@
 package com.example.myorganizationlist.ui.recycleview_adapter
 
 import android.content.Context
-import android.icu.text.DecimalFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.myorganizationlist.R
 import com.example.myorganizationlist.model.Product
+import java.text.NumberFormat
+import java.util.Locale
 
 class ListaOfProductsAdapter(
     private val context: Context,
@@ -24,10 +27,16 @@ class ListaOfProductsAdapter(
             val title = itemView.findViewById<TextView>(R.id.title)
             val description = itemView.findViewById<TextView>(R.id.descriptions)
             val price = itemView.findViewById<TextView>(R.id.price)
+            val imagem = itemView.findViewById<ImageView>(R.id.produto_item_imagem_view)
+
+            imagem.load(product.imgUrl)
 
             title.text = product.title
             description.text = product.description
-            price.text = "R$ ${product.price.toPlainString()}"
+
+            val currencyInstance: NumberFormat = NumberFormat.getCurrencyInstance(Locale("pt", "br"))
+
+            price.text = currencyInstance.format(product.price)
 
         }
     }

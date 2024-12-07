@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">My Organization List</string>
+    <string name="extended_fab_content_desc">ADICIONAR NOVO</string>
+    <string name="imput_hint_title">Título</string>
+    <string name="imput_hint_description">Description</string>
+    <string name="imput_hint_price">Price</string>
+    <string name="form_salve_button">Salvar</string>
+    <string name="image_form_button_load">Carregar</string>
+    <string name="image_form_image_url">URL da Imagem</string>
 </resources>

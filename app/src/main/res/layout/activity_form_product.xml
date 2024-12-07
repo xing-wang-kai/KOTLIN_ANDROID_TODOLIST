@@ -15,52 +15,79 @@
         android:layout_height="wrap_content"
         tools:context=".ui.activitys.FormProductActivity">
 
-        <EditText
-            android:id="@+id/title_imput"
-            android:layout_margin="16dp"
-
-            android:layout_width="0dp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/title_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:textSize="18sp"
-
-            android:hint="Título"
-
+            android:layout_margin="16dp"
+            app:layout_constraintTop_toBottomOf="@id/focus_imagem"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
 
-            />
-        <EditText
-            android:id="@+id/descriptions_imput"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            >
 
-            android:layout_width="0dp"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/title_imput"
+
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:textSize="18sp"
-
-            android:hint="Descrição"
-
-            app:layout_constraintStart_toStartOf="@id/title_imput"
-            app:layout_constraintEnd_toEndOf="@id/title_imput"
-            app:layout_constraintTop_toBottomOf="@id/title_imput"
-
+            android:hint="@string/imput_hint_title"
             />
-        <EditText
-            android:id="@+id/price_imput"
 
-            android:layout_width="0dp"
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/descriptions_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:textSize="18sp"
+            android:layout_margin="16dp"
+            app:layout_constraintTop_toBottomOf="@id/title_container"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
 
-            android:hint="Preço"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            >
 
-            app:layout_constraintStart_toStartOf="@id/descriptions_imput"
-            app:layout_constraintEnd_toEndOf="@id/descriptions_imput"
-            app:layout_constraintTop_toBottomOf="@id/descriptions_imput"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/descriptions_imput"
 
-            />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/imput_hint_description"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/price_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintTop_toBottomOf="@id/descriptions_container"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/price_imput"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/imput_hint_price"
+
+                android:inputType="numberDecimal"
+
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
 
         <Button
             android:id="@+id/submit_button"
@@ -68,7 +95,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
-            android:text="Salvar"
+            android:text="@string/form_salve_button"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp"
@@ -78,8 +105,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/price_imput"/>
+            app:layout_constraintTop_toBottomOf="@+id/price_container"/>
 
+        <ImageView
+            android:id="@+id/focus_imagem"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.42"
+            android:scaleType="centerCrop"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+
+            app:layout_constraintWidth_percent="1"
+
+            app:srcCompat="@drawable/imagem_padrao" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
