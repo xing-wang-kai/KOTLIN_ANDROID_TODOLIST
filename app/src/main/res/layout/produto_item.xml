@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <com.google.android.material.card.MaterialCardView
+    android:id="@+id/product_item_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
 
@@ -80,7 +81,7 @@
 
             android:textSize="18sp"
             android:fontFamily="@font/montserrat_medium"
-            android:textColor="@color/purple_500"
+            android:textColor="@color/strawberry_strong_pink"
             android:textStyle="bold"
 
             app:layout_constraintTop_toBottomOf="@id/descriptions"

@@ -1,29 +1,31 @@
 package com.example.myorganizationlist.ui.activitys
 
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.widget.Button
-import android.widget.EditText
+import android.view.View
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import coil.load
 import com.example.myorganizationlist.DAO.ProductDAO
 import com.example.myorganizationlist.R
 import com.example.myorganizationlist.databinding.ActivityFormProductBinding
-import com.example.myorganizationlist.databinding.ActivityMainBinding
-import com.example.myorganizationlist.databinding.ImageFormBinding
+import com.example.myorganizationlist.extensions.tryToLoadImage
 import com.example.myorganizationlist.model.Product
+import com.example.myorganizationlist.ui.dialog.FormImageDialog
 import java.math.BigDecimal
 
+/**
+ * Represeta o objeto do Formulário de produtos
+ *
+ * @property activity_form_product é a view do formulário de produto
+ * @property productDAO é a classe que representa Data Access Object
+ * @property url é a url que usamos para acessar a imagem no formulário
+ *
+ * **/
 class FormProductActivity : AppCompatActivity(
     R.layout.activity_form_product
 ) {
 
     private val productDAO = ProductDAO()
     private lateinit var binding: ActivityFormProductBinding
-
     private var url: String? = null
 
 
@@ -34,24 +36,16 @@ class FormProductActivity : AppCompatActivity(
 
         binding = ActivityFormProductBinding.inflate(layoutInflater)
 
-        val bindingImageForm = ImageFormBinding.inflate(layoutInflater)
-        bindingImageForm.imageFormButtomLoad.setOnClickListener{
-            this.url = bindingImageForm.imageFormImputImgUrl.text.toString()
-            bindingImageForm.imageFormImageView.load(this.url)
-
-        }
-
         setContentView(binding.root)
         this.configSaveButton()
 
-        binding.focusImagem.setOnClickListener{
-            AlertDialog.Builder(this)
-                .setView(bindingImageForm.root)
-                .setPositiveButton("Confirmar") {_, _ ->
-                    binding.focusImagem.load(this.url)
-                }
-                .setNegativeButton("Cancelar"){_,_->}
-                .show()
+        title = "Cadastrar Produtos"
+
+        binding.focusImagem.setOnClickListener {
+            FormImageDialog(this).show(this.url){ imagem: String ->
+                this.url = imagem
+                binding.focusImagem.tryToLoadImage(url)
+            }
         }
 
     }
@@ -69,14 +63,11 @@ class FormProductActivity : AppCompatActivity(
 
     private fun createNewProduct(): Product{
 
+        binding.activityFormProductProgressBar?.show()
+
         val titleField = binding.titleImput
         val descriptionField = binding.descriptionsImput
         val priceField = binding.priceImput
-        val imgUrlField = binding.focusImagem
-
-        //val titleField = findViewById<EditText>(R.id.title_imput)
-        //val descriptionField = findViewById<EditText>(R.id.descriptions_imput)
-        //val priceField = findViewById<EditText>(R.id.price_imput)
 
         val title = titleField.text.toString()
         val description = descriptionField.text.toString()
@@ -89,6 +80,7 @@ class FormProductActivity : AppCompatActivity(
             BigDecimal(price)
         }
 
+        binding.activityFormProductProgressBar?.hide()
         return Product(
             title = title,
             description = description,

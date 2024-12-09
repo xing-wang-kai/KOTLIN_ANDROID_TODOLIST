@@ -1,49 +1,34 @@
 package com.example.myorganizationlist.ui.recycleview_adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import com.example.myorganizationlist.R
-import com.example.myorganizationlist.databinding.ActivityFormProductBinding
 import com.example.myorganizationlist.databinding.ProdutoItemBinding
+import com.example.myorganizationlist.extensions.tryToLoadImage
 import com.example.myorganizationlist.model.Product
+import com.example.myorganizationlist.ui.activitys.ProductCardLayoutActivity
 import java.text.NumberFormat
 import java.util.Locale
 
 class ListaOfProductsAdapter(
     private val context: Context,
-    products: List<Product>,
-
+    products: List<Product>
 ) : RecyclerView.Adapter<ListaOfProductsAdapter.ViewHolder>() {
 
     private var datasets = products.toMutableList()
 
     class ViewHolder(private val binding: ProdutoItemBinding): RecyclerView.ViewHolder(binding.root) {
 
-
-        fun bindThis(product: Product) {
-
+        fun bindThis(product: Product, context: Context) {
 
             val title = binding.title
             val description = binding.descriptions
             val price = binding.price
             val imagem = binding.produtoItemImagemView
 
-//            var visibility = if(product.imgUrl != null){
-//                View.VISIBLE
-//            }else{
-//                View.INVISIBLE
-//            }
-
-            imagem.load(product.imgUrl){
-                fallback(R.drawable.erro)
-                error(R.drawable.erro)
-            }
+            imagem.tryToLoadImage(product.imgUrl)
 
             title.text = product.title
             description.text = product.description
@@ -51,6 +36,16 @@ class ListaOfProductsAdapter(
             val currencyInstance: NumberFormat = NumberFormat.getCurrencyInstance(Locale("pt", "br"))
 
             price.text = currencyInstance.format(product.price)
+
+            binding.productItemCard.setOnClickListener {
+                val intent = Intent(context, ProductCardLayoutActivity::class.java)
+                intent.putExtra("PRODUCT_TITLE", product.title)
+                intent.putExtra("PRODUCT_DESCRITION", product.description)
+                intent.putExtra("PRODUCT_PRICE", product.price.toString())
+                intent.putExtra("PRODUCT_IMGURL", product.imgUrl)
+
+                context.startActivity(intent)
+            }
 
         }
     }
@@ -67,7 +62,7 @@ class ListaOfProductsAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = datasets[position]
-        holder.bindThis(product)
+        holder.bindThis(product, context)
     }
 
     fun upgrade(products: List<Product>) {

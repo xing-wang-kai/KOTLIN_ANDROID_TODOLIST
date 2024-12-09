@@ -2,7 +2,6 @@ package com.example.myorganizationlist.ui.activitys
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -10,7 +9,6 @@ import com.example.myorganizationlist.DAO.ProductDAO
 import com.example.myorganizationlist.R
 import com.example.myorganizationlist.databinding.ActivityMainBinding
 import com.example.myorganizationlist.databinding.ImageFormBinding
-import com.example.myorganizationlist.databinding.ProdutoItemBinding
 import com.example.myorganizationlist.ui.recycleview_adapter.ListaOfProductsAdapter
 
 class ListProductsActivity: AppCompatActivity(R.layout.activity_main) {
@@ -30,8 +28,14 @@ class ListProductsActivity: AppCompatActivity(R.layout.activity_main) {
         imageFormBinding = ImageFormBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-        configureRecycleView()
 
+        binding.activityMainSwipeRefresh?.setOnRefreshListener{
+            productDao.findAll()
+            adapter.upgrade(productDao.findAll())
+            binding.activityMainSwipeRefresh?.isRefreshing = false
+        }
+
+        configureRecycleView()
     }
 
     override fun onResume() {
@@ -41,8 +45,6 @@ class ListProductsActivity: AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun configureRecycleView(){
-
-
         //val recycleView: RecyclerView = findViewById<RecyclerView>(R.id.list_of_products)
 
         val recycleView: RecyclerView = binding.listOfProducts
@@ -53,9 +55,9 @@ class ListProductsActivity: AppCompatActivity(R.layout.activity_main) {
 
     private fun configureFab(){
 
-        val findViewById = binding.floatingActionButton
+        val floatingButton = binding.floatingActionButton
         //val findViewById = findViewById<FloatingActionButton>(R.id.floatingActionButton)
-        findViewById.setOnClickListener{
+        floatingButton.setOnClickListener{
             val intent = Intent(this, FormProductActivity::class.java)
             startActivity(intent)
         }
