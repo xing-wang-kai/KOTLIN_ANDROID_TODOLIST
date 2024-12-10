@@ -12,6 +12,24 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="edite">edite</string>
+    <string name="delete">delete</string>
+    <string name="ordem_menu_title_asc">Title Asc</string>
+    <string name="ordem_menu_title_desc">Title Desc</string>
+    <string name="ordem_menu_description_asc">Description Asc</string>
+    <string name="ordem_menu_description_desc">Description Desc</string>
+    <string name="ordem_menu_price_asc">Price Asc</string>
+    <string name="ordem_menu_price_desc">Price Desc</string>
+    <string name="content_login_user_login_buttom">Login</string>
+    <string name="content_login_user_newuser_buttom">Create account</string>
+    <string name="content_login_user_hint_password">your password there</string>
+    <string name="content_login_user_hint_email">your access email there</string>
+
+    <string name="activity_registar_new_user_password">Digite um Senha</string>
+    <string name="activity_registar_new_user_email">Qual seu melhor e-mail?</string>
+    <string name="activity_registar_new_user_name">Qual seu nome completo</string>
+    <string name="activity_registar_new_user_register_buttom">Registre-se</string>
+
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ordem_menu"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <item
+        android:id="@+id/ordem_menu_title_asc"
+        android:icon="@drawable/ic_asc"
+        android:title="@string/ordem_menu_title_asc" />
+    <item
+        android:id="@+id/ordem_menu_title_desc"
+        android:icon="@drawable/ic_asc"
+        android:title="@string/ordem_menu_title_desc" />
+    <item
+        android:id="@+id/ordem_menu_description_asc"
+        android:icon="@drawable/ic_asc"
+        android:title="@string/ordem_menu_description_asc" />
+    <item
+        android:id="@+id/ordem_menu_description_desc"
+        android:icon="@drawable/ic_asc"
+        android:title="@string/ordem_menu_description_desc" />
+    <item
+        android:id="@+id/ordem_menu_price_asc"
+        android:icon="@drawable/ic_asc"
+        android:title="@string/ordem_menu_price_asc" />
+    <item
+        android:id="@+id/ordem_menu_price_desc"
+        android:icon="@drawable/ic_asc"
+        android:title="@string/ordem_menu_price_desc"/>
+</menu>

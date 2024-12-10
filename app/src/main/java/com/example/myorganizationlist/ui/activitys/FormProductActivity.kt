@@ -1,85 +1,103 @@
 package com.example.myorganizationlist.ui.activitys
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myorganizationlist.DAO.ProductDAO
+import androidx.lifecycle.lifecycleScope
 import com.example.myorganizationlist.R
+import com.example.myorganizationlist.database.AppDatabase
 import com.example.myorganizationlist.databinding.ActivityFormProductBinding
 import com.example.myorganizationlist.extensions.tryToLoadImage
 import com.example.myorganizationlist.model.Product
 import com.example.myorganizationlist.ui.dialog.FormImageDialog
+import kotlinx.coroutines.launch
 import java.math.BigDecimal
 
-/**
- * Represeta o objeto do Formulário de produtos
- *
- * @property activity_form_product é a view do formulário de produto
- * @property productDAO é a classe que representa Data Access Object
- * @property url é a url que usamos para acessar a imagem no formulário
- *
- * **/
 class FormProductActivity : AppCompatActivity(
     R.layout.activity_form_product
 ) {
 
-    private val productDAO = ProductDAO()
-    private lateinit var binding: ActivityFormProductBinding
     private var url: String? = null
-
+    private var currentProduct: Product? = null
+    private var idProduct: Long = 0L
+    private val binding by lazy {
+        ActivityFormProductBinding.inflate(layoutInflater)
+    }
+    private val productDao by lazy{
+        AppDatabase.instancia(this).produtoDao()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
-        binding = ActivityFormProductBinding.inflate(layoutInflater)
-
-        setContentView(binding.root)
-        this.configSaveButton()
-
+        setContentView(this.binding.root)
+        configSaveButton()
         title = "Cadastrar Produtos"
 
         binding.focusImagem.setOnClickListener {
-            FormImageDialog(this).show(this.url){ imagem: String ->
+            FormImageDialog(this).show(this.url) { imagem: String ->
                 this.url = imagem
-                binding.focusImagem.tryToLoadImage(url)
+                binding.focusImagem.tryToLoadImage(this.url)
             }
         }
 
-    }
+        this.idProduct = intent.getLongExtra("PRODUCT_ID", 0L)
 
-    private fun configSaveButton(){
-        val submit = binding.submitButton
-        //val submit = findViewById<Button>(R.id.submit_button)
-        submit.setOnClickListener {
-            val newProduct = this.createNewProduct()
-            productDAO.add(newProduct)
-            finish()
+        if(this.idProduct != 0L){
+
+            lifecycleScope.launch {
+                currentProduct = loadProduct(idProduct)
+
+                title = "Editar Produto: ${currentProduct?.title}"
+                binding.titleImput.setText(currentProduct?.title)
+                binding.descriptionsImput.setText(currentProduct?.description)
+                binding.priceImput.setText(currentProduct?.price.toString())
+                binding.focusImagem.tryToLoadImage(currentProduct?.imgUrl)
+                url = currentProduct?.imgUrl
+            }
+
         }
 
     }
 
-    private fun createNewProduct(): Product{
+    private fun configSaveButton() {
+        val submit = binding.submitButton
 
+        submit.setOnClickListener {
+            if (this.idProduct != 0L) {
+                lifecycleScope.launch {
+                    val newProduct = createNewProduct()
+                    newProduct.id = idProduct
+                    updateProduct(newProduct)
+                    finish()
+                }
+
+            } else {
+
+                lifecycleScope.launch{
+                    val newProduct = createNewProduct()
+                    productDao.insertAll(newProduct)
+                    finish()
+                }
+
+            }
+        }
+    }
+
+    private fun createNewProduct(): Product {
         binding.activityFormProductProgressBar?.show()
-
         val titleField = binding.titleImput
         val descriptionField = binding.descriptionsImput
         val priceField = binding.priceImput
-
         val title = titleField.text.toString()
         val description = descriptionField.text.toString()
         val price = priceField.text.toString()
-        val imgUrl = url
-
-        val priceDecimalValue = if(price.isBlank()) {
+        val imgUrl = this.url
+        val priceDecimalValue = if (price.isBlank()) {
             BigDecimal.ZERO
-        }else{
+        } else {
             BigDecimal(price)
         }
-
         binding.activityFormProductProgressBar?.hide()
         return Product(
             title = title,
@@ -87,5 +105,13 @@ class FormProductActivity : AppCompatActivity(
             price = priceDecimalValue,
             imgUrl = imgUrl
         )
+    }
+
+    private suspend fun loadProduct(id: Long): Product {
+            return this.productDao.findByid(id)
+    }
+
+    private suspend fun updateProduct(product: Product) {
+        this.productDao.update(product)
     }
 }

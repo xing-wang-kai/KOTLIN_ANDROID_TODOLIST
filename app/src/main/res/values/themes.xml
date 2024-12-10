@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.MyOrganizationList" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.MyOrganizationList" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/cardview_dark_background</item>
-        <item name="colorPrimaryVariant">@color/strawberry_strong_pink</item>
+        <item name="colorPrimary">@color/strawberry_strong_pink</item>
+        <item name="colorPrimaryVariant">@color/strawberry_light_pink</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/limon_light_green</item>
@@ -40,15 +40,27 @@
     </style>
 
     <style name="ThemeOverlay.App.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
-        <item name="colorSecondary">@color/strawberry_strong_pink</item>
-        <item name="colorSecondaryVariant">@color/limon_light_green</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorPrimary">@color/strawberry_strong_pink</item>
+        <item name="colorPrimaryVariant">@color/strawberry_light_pink</item>
+        <item name="colorOnPrimary">@color/white</item>
+    </style>
+    <!-- Base application theme. -->
+
+    <style name="CustomTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="actionOverflowButtonStyle">@style/OverflowMenuStyle</item>
+    </style>
+
+    <style name="OverflowMenuStyle" parent="@style/Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_organized_menu
+        </item> <!-- Substitua pelo ícone desejado -->
     </style>
     <!-- Base application theme. -->
     <style name="Base.Theme.MyOrganizationList" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
+
+
 </resources>
 
 

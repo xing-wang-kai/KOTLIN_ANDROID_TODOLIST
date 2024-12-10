@@ -8,12 +8,12 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".ui.activitys.FormProductActivity"
-
         >
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -43,7 +43,14 @@
             app:icon="@drawable/baseline_add_circle_outline_24"
 
             app:iconTint="@android:color/white"
+            app:backgroundTint="@color/strawberry_strong_pink"
             app:layout_constraintBottom_toBottomOf="parent"
+
+            app:showMotionSpec="@anim/nav_default_enter_anim"
+            app:hoveredFocusedTranslationZ="10dp"
+
+            android:elevation="10px"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:shapeAppearanceOverlay="@style/Widget.MaterialComponents.ExtendedFloatingActionButton" />
 
@@ -67,6 +74,7 @@
                 tools:listitem="@layout/produto_item"
             />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

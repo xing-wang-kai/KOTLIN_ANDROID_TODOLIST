@@ -14,7 +14,7 @@ import java.util.Locale
 
 class ListaOfProductsAdapter(
     private val context: Context,
-    products: List<Product>
+    products: List<Product> = emptyList()
 ) : RecyclerView.Adapter<ListaOfProductsAdapter.ViewHolder>() {
 
     private var datasets = products.toMutableList()
@@ -39,11 +39,7 @@ class ListaOfProductsAdapter(
 
             binding.productItemCard.setOnClickListener {
                 val intent = Intent(context, ProductCardLayoutActivity::class.java)
-                intent.putExtra("PRODUCT_TITLE", product.title)
-                intent.putExtra("PRODUCT_DESCRITION", product.description)
-                intent.putExtra("PRODUCT_PRICE", product.price.toString())
-                intent.putExtra("PRODUCT_IMGURL", product.imgUrl)
-
+                intent.putExtra("PRODUCT_ID", product.id)
                 context.startActivity(intent)
             }
 
@@ -70,4 +66,5 @@ class ListaOfProductsAdapter(
         datasets.addAll(products)
         notifyDataSetChanged()
     }
+
 }
